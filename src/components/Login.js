@@ -1,33 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
-const Login = ({
-  username,
-  setUsername,
-  password,
-  setPassword,
-  token,
-  setToken,
-  baseUrl,
-}) => {
+const Login = ({ setToken, baseUrl, error, setError }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
     try {
       const response = await fetch(baseUrl + "/users/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    });
+          username: username,
+          password: password,
+        }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    console.log('data', data)
+      data.error && setError(data.error)
 
+      setToken(data.token);
+
+      !data.error && navigate("/Routines");
+      
     } catch (error) {
-      console.error("Error");
+      console.error("Error", error);
     }
   };
 
@@ -67,9 +68,15 @@ const Login = ({
             Submit
           </button>
         </div>
+        {error && (
+          <div className="alert alert-primary col-sm-4 text-center mt-2" role="alert">
+            {error}
+          </div>
+        )}
       </div>
     </form>
   );
 };
 
 export default Login;
+

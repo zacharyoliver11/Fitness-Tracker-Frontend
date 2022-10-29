@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
-const Register = ({
-  username,
-  setUsername,
-  password,
-  setPassword,
-  token,
-  setToken,
-  baseUrl,
-}) => {
+const Register = ({ setToken, baseUrl, error, setError }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   const handleRegister = async () => {
     const response = await fetch(baseUrl + "/users/register", {
       method: "POST",
@@ -21,9 +18,15 @@ const Register = ({
       }),
     });
 
-    const data = await response.json()
+    const data = await response.json();
 
     console.log('data', data)
+
+    data.error && setError(data.error);
+
+    setToken(data.token);
+
+    !data.error && navigate("/Routines");
   };
 
   return (
@@ -62,6 +65,14 @@ const Register = ({
             Submit
           </button>
         </div>
+        {error && (
+          <div
+            className="alert alert-primary col-sm-4 text-center mt-2"
+            role="alert"
+          >
+            {error}
+          </div>
+        )}
       </div>
     </form>
   );
