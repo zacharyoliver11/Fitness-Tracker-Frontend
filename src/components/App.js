@@ -9,7 +9,9 @@ import Register from "./Register";
 import CreateRoutine from "./CreateRoutine";
 import CreateActivity from "./CreateActivity";
 
-const baseUrl = "https://safe-mountain-44229.herokuapp.com/api";
+// const baseUrl = "https://safe-mountain-44229.herokuapp.com/api";
+const baseUrl = "https://fitnesstrac-kr.herokuapp.com/api";
+
 
 const App = () => {
   const [username, setUsername] = useState("");
@@ -174,6 +176,10 @@ const App = () => {
                 handleDelete={handleDelete}
                 myRoutines={myRoutines}
                 setMyRoutines={setMyRoutines}
+                activities={activities}
+                setRoutines={setRoutines}
+                error={error}
+                setError={setError}
               />
             }
           />
@@ -192,6 +198,10 @@ const App = () => {
                 baseUrl={baseUrl}
                 token={token}
                 setRoutines={setRoutines}
+                setMyRoutines={setMyRoutines}
+                error={error}
+                setError={setError}
+                routines={routines}
               />
             }
           ></Route>

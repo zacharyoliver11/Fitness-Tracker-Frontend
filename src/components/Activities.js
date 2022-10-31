@@ -13,8 +13,8 @@ const Activities = ({ activities, token }) => {
           <div key={activity.id}>
             <div className="card m-3">
               <div className="card-body">
-                <h4 className="card-title">{activity.name}</h4>
-                <p className="card-text">{activity.description}</p>
+                <h4 className="card-title">Name: {activity.name}</h4>
+                <p className="card-text">Description: {activity.description}</p>
               </div>
             </div>
           </div>

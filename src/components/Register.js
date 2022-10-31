@@ -20,8 +20,6 @@ const Register = ({ setToken, baseUrl, error, setError }) => {
 
     const data = await response.json();
 
-    console.log('data', data)
-
     data.error && setError(data.error);
 
     setToken(data.token);

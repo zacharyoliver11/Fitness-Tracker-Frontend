@@ -21,12 +21,11 @@ const Login = ({ setToken, baseUrl, error, setError }) => {
 
       const data = await response.json();
 
-      data.error && setError(data.error)
+      data.error && setError(data.error);
 
       setToken(data.token);
 
       !data.error && navigate("/Routines");
-      
     } catch (error) {
       console.error("Error", error);
     }
@@ -69,7 +68,10 @@ const Login = ({ setToken, baseUrl, error, setError }) => {
           </button>
         </div>
         {error && (
-          <div className="alert alert-primary col-sm-4 text-center mt-2" role="alert">
+          <div
+            className="alert alert-primary col-sm-4 text-center mt-2"
+            role="alert"
+          >
             {error}
           </div>
         )}
@@ -79,4 +81,3 @@ const Login = ({ setToken, baseUrl, error, setError }) => {
 };
 
 export default Login;
-
