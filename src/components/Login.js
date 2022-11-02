@@ -25,7 +25,10 @@ const Login = ({ setToken, baseUrl, error, setError }) => {
 
       setToken(data.token);
 
-      !data.error && navigate("/Routines");
+      if (!data.error) {
+        setError("");
+        navigate("/Routines");
+      }
     } catch (error) {
       console.error("Error", error);
     }
