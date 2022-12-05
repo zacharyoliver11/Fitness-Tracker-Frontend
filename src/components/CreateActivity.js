@@ -33,7 +33,8 @@ const CreateActivity = ({
 
       activities.find((activity) => activity.name === name)
         ? setError(`An activity with the name ${name} already exists.`)
-        : setActivities((prev) => [data, ...prev], navigate("/Activities"));
+        : setActivities((prev) => [data, ...prev]);
+      navigate("/Activities");
     } catch (error) {
       console.error(error);
     }
